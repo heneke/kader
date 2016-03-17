@@ -22,15 +22,15 @@ class PersonEntity extends KontaktEntity
      */
     public function prePersistOrUpdate()
     {
-        $bezeichnung = $this->nachname ? $this->nachname : null;
+        $this->bezeichnung = $this->nachname ? $this->nachname : null;
         if ($this->vorname) {
-            if ($bezeichnung) {
-                $bezeichnung .= ', ';
+            if ($this->bezeichnung) {
+                $this->bezeichnung .= ', ';
             }
-            $bezeichnung .= $this->vorname;
+            $this->bezeichnung .= $this->vorname;
         }
-        if ($bezeichnung) {
-            $this->bezeichnung = strlen($bezeichnung > 255) ? substr($bezeichnung, 0, 255) : $bezeichnung;
+        if ($this->bezeichnung) {
+            $this->bezeichnung = mb_strlen($this->bezeichnung > 255) ? mb_substr($this->bezeichnung, 0, 254) . '…' : $this->bezeichnung;
         }
     }
 }
