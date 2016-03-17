@@ -32,6 +32,10 @@ class PaarEntity extends KontaktEntity
             }
             $this->bezeichnung .= $partnerin->bezeichnung;
         }
+
+        if (mb_strlen($this->bezeichnung) > 255) {
+            $this->bezeichnung = mb_substr($this->bezeichnung, 0, 254) . '…';
+        }
     }
 
     /**
