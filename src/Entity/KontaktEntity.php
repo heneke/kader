@@ -1,10 +1,13 @@
 <?php
 namespace Kader\ORM\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\DiscriminatorColumn;
 use Doctrine\ORM\Mapping\DiscriminatorMap;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\InheritanceType;
+use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\Table;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\Column;
@@ -18,7 +21,7 @@ use Doctrine\ORM\Mapping\GeneratedValue;
  * @Table(name="kontakte")
  * @InheritanceType(value="SINGLE_TABLE")
  * @DiscriminatorColumn(name="ko_typ", type="integer")
- * @DiscriminatorMap(value={1="PersonEntity"})
+ * @DiscriminatorMap(value={1="PersonEntity", 2="PaarEntity"})
  *
  * @property-read int $id Kontakt-ID
  * @property-read string $bezeichnung Bezeichnung
@@ -54,6 +57,18 @@ abstract class KontaktEntity
      */
     protected $vorname;
 
+    /**
+     * @var Collection
+     * @OneToMany(targetEntity="KontaktBeziehungEntity", mappedBy="parent", fetch="LAZY", cascade={"persist", "remove", "merge"})
+     */
+    private $children;
+
+    /**
+     * @var Collection
+     * @OneToMany(targetEntity="KontaktBeziehungEntity", mappedBy="child", fetch="LAZY", cascade={"persist", "remove", "merge"})
+     */
+    private $parents;
+
     public function __get($key)
     {
         if (isset($this->$key)) {
@@ -84,5 +99,27 @@ abstract class KontaktEntity
     public function __isset($key)
     {
         return isset($this->$key);
+    }
+
+    /**
+     * @return Collection
+     */
+    protected function getChildren()
+    {
+        if ($this->children == null) {
+            $this->children = new ArrayCollection();
+        }
+        return $this->children;
+    }
+
+    /**
+     * @return Collection
+     */
+    protected function getParents()
+    {
+        if ($this->parents == null) {
+            $this->parents = new ArrayCollection();
+        }
+        return $this->parents;
     }
 }

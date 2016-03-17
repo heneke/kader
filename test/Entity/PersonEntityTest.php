@@ -51,4 +51,5 @@ class PersonEntityTest extends AbstractEntityManagerTest
         $this->em->flush();
         $this->assertEquals('Schulze, Maria', $p->bezeichnung);
     }
+
 }
