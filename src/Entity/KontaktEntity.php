@@ -1,5 +1,5 @@
 <?php
-namespace Kader\ORM\Model;
+namespace Kader\ORM\Entity;
 
 use Doctrine\ORM\Mapping\DiscriminatorColumn;
 use Doctrine\ORM\Mapping\DiscriminatorMap;
@@ -11,21 +11,21 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\GeneratedValue;
 
 /**
- * Class Kontakt
- * @package Kader\ORM\Model
+ * Class KontaktEntity
+ * @package Kader\ORM\Entity
  *
  * @Entity
  * @Table(name="kontakte")
  * @InheritanceType(value="SINGLE_TABLE")
  * @DiscriminatorColumn(name="ko_typ", type="integer")
- * @DiscriminatorMap(value={1="Person"})
+ * @DiscriminatorMap(value={1="PersonEntity"})
  *
  * @property-read int $id Kontakt-ID
  * @property-read string $bezeichnung Bezeichnung
  * @property string $nachname Nachname
  * @property string $vorname Vorname
  */
-abstract class Kontakt
+abstract class KontaktEntity
 {
 
     /**

@@ -1,18 +1,19 @@
 <?php
-namespace Kader\ORM\Model;
+namespace Kader\ORM\Entity;
 
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Doctrine\ORM\Mapping\PrePersist;
 use Doctrine\ORM\Mapping\PreUpdate;
+use Kader\ORM\Entity\KontaktEntity;
 
 /**
- * Class Person
- * @package Kader\ORM\Model
+ * Class PersonEntity
+ * @package Kader\ORM\Entity
  * @Entity
  * @HasLifecycleCallbacks
  */
-class Person extends Kontakt
+class PersonEntity extends KontaktEntity
 {
 
     /**
@@ -22,8 +23,10 @@ class Person extends Kontakt
     public function prePersistOrUpdate()
     {
         $bezeichnung = $this->nachname ? $this->nachname : null;
-        if ($bezeichnung && $this->vorname) {
-            $bezeichnung .= ', ';
+        if ($this->vorname) {
+            if ($bezeichnung) {
+                $bezeichnung .= ', ';
+            }
             $bezeichnung .= $this->vorname;
         }
         if ($bezeichnung) {
