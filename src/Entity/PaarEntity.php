@@ -23,6 +23,7 @@ class PaarEntity extends KontaktEntity
     {
         $partner = $this->getPartner();
         if ($partner != null) {
+            $partner->prePersistOrUpdate();
             $this->bezeichnung = $partner->bezeichnung;
         }
         $partnerin = $this->getPartnerin();
@@ -30,6 +31,7 @@ class PaarEntity extends KontaktEntity
             if ($this->bezeichnung) {
                 $this->bezeichnung .= ' / ';
             }
+            $partnerin->prePersistOrUpdate();
             $this->bezeichnung .= $partnerin->bezeichnung;
         }
 
