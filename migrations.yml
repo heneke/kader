@@ -1,0 +1,4 @@
+name: Kader ORM Migrations
+migrations_namespace: Kader\ORM\Migrations
+table_name: kader_orm_migration_version
+migrations_directory: src/Migrations
