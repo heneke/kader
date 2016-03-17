@@ -17,4 +17,4 @@ before_script:
   - if [[ "$DB" == "mysql" ]]; then mysql -e "CREATE DATABASE IF NOT EXISTS kader_test;" -uroot; fi
   - vendor/bin/doctrine-migrations migrations:migrate -n
 
-script: php vendor/bin/phpunit
+script: php vendor/bin/phpunit test
