@@ -1,7 +1,7 @@
 <?php
-namespace Kader\ORM;
+namespace Kader;
 
-class KaderORMPersistenceUnitInfo
+class KaderPersistenceUnitInfo
 {
 
     /**

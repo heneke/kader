@@ -7,12 +7,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Kader\\ORM\\": "src/"
+      "Kader\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Kader\\ORM\\": "test/"
+      "Kader\\": "test/"
     },
     "files": [
       "test/functions.php"
