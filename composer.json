@@ -1,4 +1,5 @@
 {
+  "name": "kader/kader-orm",
   "require": {
     "doctrine/orm": "^2.5",
     "doctrine/migrations": "^1.4"
