@@ -2,8 +2,9 @@
 namespace Kader\ORM;
 
 use Doctrine\ORM\EntityManager;
+use Kader\AbstractTest;
 
-abstract class AbstractEntityManagerTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractEntityManagerTest extends AbstractTest
 {
 
     /**

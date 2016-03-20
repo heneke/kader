@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping\Table;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\GeneratedValue;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * Class KontaktEntity
@@ -22,6 +25,7 @@ use Doctrine\ORM\Mapping\GeneratedValue;
  * @InheritanceType(value="SINGLE_TABLE")
  * @DiscriminatorColumn(name="ko_typ", type="integer")
  * @DiscriminatorMap(value={1="PersonEntity", 2="PaarEntity"})
+ * @ExclusionPolicy("all")
  *
  * @property-read int $id Kontakt-ID
  * @property-read string $bezeichnung Bezeichnung
@@ -36,24 +40,30 @@ abstract class KontaktEntity
      * @Id
      * @GeneratedValue(strategy="AUTO")
      * @Column(name="ko_id", type="integer")
+     * @Expose
      */
     protected $id;
 
     /**
      * @var string
      * @Column(name="ko_bezeichnung", type="string", length=255)
+     * @Expose
      */
     protected $bezeichnung;
 
     /**
      * @var string
      * @Column(name="ko_nachname", type="string", length=100, nullable=true)
+     * @Expose
+     * @Groups(groups={"person"})
      */
     protected $nachname;
 
     /**
      * @var string
      * @Column(name="ko_vorname", type="string", length=100, nullable=true)
+     * @Expose
+     * @Groups(groups={"person"})
      */
     protected $vorname;
 
