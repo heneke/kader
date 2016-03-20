@@ -50,4 +50,22 @@ class PageRequest implements PageableInterface
         return $this->pageSize;
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function next()
+    {
+        return new PageRequest($this->pageNumber + 1, $this->pageSize);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function previousOrFirst()
+    {
+        $previousOrFirstPageNumber = $this->pageNumber == 1 ? 1 : $this->pageNumber - 1;
+        return new PageRequest($previousOrFirstPageNumber, $this->pageSize);
+    }
+
+
 }

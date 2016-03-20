@@ -24,4 +24,18 @@ interface PageableInterface
      * @return integer
      */
     public function getPageSize();
+
+    /**
+     * Returns the next pageable
+     *
+     * @return mixed
+     */
+    public function next();
+
+    /**
+     * Returns the previous or first pageable
+     *
+     * @return PageableInterface
+     */
+    public function previousOrFirst();
 }
