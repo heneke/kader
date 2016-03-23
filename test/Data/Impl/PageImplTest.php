@@ -25,9 +25,9 @@ class PageImplTest extends AbstractTest
 
     /**
      * @test
-     * @dataProvider hasPreviousNextDataProvider
+     * @dataProvider implementationDataProvider
      */
-    public function hasPreviousNext($expectedPrevious, $expectedNext, array $content, PageableInterface $pageable = null, $total = null)
+    public function implementation($expectedPrevious, $expectedNext, $expectedTotal, $expectedTotalPages, array $content, PageableInterface $pageable = null, $total = null)
     {
         $pi = new PageImpl($content, $pageable, $total);
         $this->assertEquals($expectedPrevious, $pi->hasPreviousPageable());
@@ -42,31 +42,33 @@ class PageImplTest extends AbstractTest
         } else {
             $this->assertNull($pi->nextPageable());
         }
+        $this->assertEquals($expectedTotal, $pi->getTotal());
+        $this->assertEquals($expectedTotalPages, $pi->getTotalPages());
     }
 
-    public function hasPreviousNextDataProvider()
+    public function implementationDataProvider()
     {
         return [
-            [false, false, $this->createArray(0), null, null],
-            [false, false, $this->createArray(0), $this->createPageable(1, 1), null],
-            [false, false, $this->createArray(0), $this->createPageable(1, 1), 0],
+            [false, false, 0, 0, $this->createArray(0), null, null],
+            [false, false, 0, 0, $this->createArray(0), $this->createPageable(1, 1), null],
+            [false, false, 0, 0, $this->createArray(0), $this->createPageable(1, 1), 0],
 
-            [false, false, $this->createArray(1), null, null],
-            [false, false, $this->createArray(1), $this->createPageable(1, 1), null],
-            [false, false, $this->createArray(1), $this->createPageable(1, 1), 1],
+            [false, false, 1, 1, $this->createArray(1), null, null],
+            [false, false, 1, 1, $this->createArray(1), $this->createPageable(1, 1), null],
+            [false, false, 1, 1, $this->createArray(1), $this->createPageable(1, 1), 1],
 
-            [false, false, $this->createArray(100), null, null],
-            [false, false, $this->createArray(100), $this->createPageable(1, 100), null],
-            [false, false, $this->createArray(100), $this->createPageable(1, 100), 100],
+            [false, false, 100, 1, $this->createArray(100), null, null],
+            [false, false, 100, 1, $this->createArray(100), $this->createPageable(1, 100), null],
+            [false, false, 100, 1, $this->createArray(100), $this->createPageable(1, 100), 100],
 
-            [false, true, $this->createArray(10), $this->createPageable(1, 10), 100],
-            [false, false, $this->createArray(10), $this->createPageable(1, 10), 10],
-            [true, false, $this->createArray(10), $this->createPageable(10, 10), 100],
-            [true, true, $this->createArray(10), $this->createPageable(10, 10), 101],
-            [true, false, $this->createArray(9), $this->createPageable(10, 10), 99],
+            [false, true, 100, 10, $this->createArray(10), $this->createPageable(1, 10), 100],
+            [false, false, 10, 1, $this->createArray(10), $this->createPageable(1, 10), 10],
+            [true, false, 100, 10, $this->createArray(10), $this->createPageable(10, 10), 100],
+            [true, true, 101, 11, $this->createArray(10), $this->createPageable(10, 10), 101],
+            [true, false, 99, 10, $this->createArray(9), $this->createPageable(10, 10), 99],
 
-            [true, true, $this->createArray(10), $this->createPageable(2, 10), 100],
-            [true, false, $this->createArray(10), $this->createPageable(2, 10), 10],
+            [true, true, 100, 10, $this->createArray(10), $this->createPageable(2, 10), 100],
+            [true, false, 10, 1, $this->createArray(10), $this->createPageable(2, 10), 10],
         ];
     }
 

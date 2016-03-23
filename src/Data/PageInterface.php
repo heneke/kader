@@ -10,6 +10,21 @@ interface PageInterface extends \Iterator
     public function getContent();
 
     /**
+     * @return PageableInterface
+     */
+    public function getPageable();
+
+    /**
+     * @return int
+     */
+    public function getTotal();
+
+    /**
+     * @return int
+     */
+    public function getTotalPages();
+
+    /**
      * @return bool
      */
     public function hasNextPageable();

@@ -1,27 +1,45 @@
 <?php
 namespace Kader\Data\Impl;
 
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\SerializedName;
 use Kader\Data\PageableInterface;
 use Kader\Data\PageInterface;
-use Kader\Data\Impl\PageRequest;
+use JMS\Serializer\Annotation\ExclusionPolicy;
 
+/**
+ * Class PageImpl
+ * @package Kader\Data\Impl
+ *
+ * @ExclusionPolicy("all")
+ */
 class PageImpl implements PageInterface
 {
 
     /**
      * @var array
+     * @Expose
      */
     private $content;
 
     /**
      * @var PageableInterface
+     * @Expose
      */
     private $pageable;
 
     /**
      * @var int
+     * @Expose
      */
     private $total;
+
+    /**
+     * @var int
+     * @Expose
+     */
+    private $totalPages = 0;
 
     /**
      * @var \ArrayIterator
@@ -45,6 +63,12 @@ class PageImpl implements PageInterface
             $this->total = intval($total);
         } else {
             $this->total = count($this->content);
+        }
+
+        if ($this->pageable->getPageSize() != PHP_INT_MAX) {
+            $this->totalPages = ceil($this->total / $this->pageable->getPageSize());
+        } else {
+            $this->totalPages = $this->total > 0 ? 1 : 0;
         }
     }
 
@@ -94,6 +118,30 @@ class PageImpl implements PageInterface
     public function getContent()
     {
         return $this->content;;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getPageable()
+    {
+        return $this->pageable;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getTotal()
+    {
+        return $this->total;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getTotalPages()
+    {
+        return $this->totalPages;
     }
 
     /**
