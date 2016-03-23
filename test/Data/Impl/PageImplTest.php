@@ -1,7 +1,10 @@
 <?php
-namespace Kader\Support;
+namespace Kader\Data\Impl;
 
 use Kader\AbstractTest;
+use Kader\Data\Impl\PageImpl;
+use Kader\Data\Impl\PageRequest;
+use Kader\Data\PageableInterface;
 
 class PageImplTest extends AbstractTest
 {

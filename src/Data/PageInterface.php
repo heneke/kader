@@ -1,5 +1,5 @@
 <?php
-namespace Kader\Support;
+namespace Kader\Data;
 
 interface PageInterface extends \Iterator
 {

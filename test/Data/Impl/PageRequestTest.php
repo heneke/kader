@@ -1,7 +1,8 @@
 <?php
-namespace Kader\Support;
+namespace Kader\Data\Impl;
 
 use Kader\AbstractTest;
+use Kader\Data\Impl\PageRequest;
 
 class PageRequestTest extends AbstractTest
 {

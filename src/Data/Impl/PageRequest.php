@@ -1,5 +1,7 @@
 <?php
-namespace Kader\Support;
+namespace Kader\Data\Impl;
+
+use Kader\Data\PageableInterface;
 
 class PageRequest implements PageableInterface
 {

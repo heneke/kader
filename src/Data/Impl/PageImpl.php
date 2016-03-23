@@ -1,5 +1,9 @@
 <?php
-namespace Kader\Support;
+namespace Kader\Data\Impl;
+
+use Kader\Data\PageableInterface;
+use Kader\Data\PageInterface;
+use Kader\Data\Impl\PageRequest;
 
 class PageImpl implements PageInterface
 {
